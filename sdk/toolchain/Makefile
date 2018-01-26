@@ -30,7 +30,7 @@ kos_root=/opt/toolchains/dc
 # kos_base: equivalent of KOS_BASE (contains include/ and kernel/)
 kos_base=/opt/toolchains/dc/kos
 binutils_ver=2.25
-gcc_ver=7.1.0
+gcc_ver=5.2.0
 newlib_ver=2.2.0
 gdb_ver=7.6
 insight_ver=6.7.1
@@ -96,7 +96,7 @@ patch_targets=patch-binutils patch-gcc patch-newlib patch-kos
 patch: $(patch_targets)
 patch-binutils: $(binutils_patches)
 patch-gcc: $(gcc_patches)
-patch-newlib: $(newlib_patches) 
+patch-newlib: $(newlib_patches)
 patch-kos: $(kos_patches)
 
 $(newlib_patches):
@@ -135,8 +135,8 @@ $(build_arm_targets): target = $(arm_target)
 $(build_arm_targets): extra_configure_args = --with-arch=armv4
 
 # To avoid code repetition, we use the same commands for both
-# architectures.  But we can't create a single target called 
-# build-binutils for both sh4 and arm, because phony targets 
+# architectures.  But we can't create a single target called
+# build-binutils for both sh4 and arm, because phony targets
 # can't be run multiple times.  So we create multiple targets.
 build_binutils     = build-sh4-binutils  build-arm-binutils
 build_gcc_pass1    = build-sh4-gcc-pass1 build-arm-gcc-pass1
@@ -225,7 +225,7 @@ gdb-$(gdb_ver).tar.bz2:
 
 unpack_gdb: gdb-$(gdb_ver).tar.bz2 unpack_gdb_stamp
 
-unpack_gdb_stamp: 
+unpack_gdb_stamp:
 	@echo "+++ Unpacking GDB..."
 	rm -f $@
 	rm -rf gdb-$(gdb_ver)
@@ -316,7 +316,7 @@ clean:
 	-rm -rf build-gcc-$(arm_target)-$(gcc_ver)
 	-rm -rf build-binutils-$(sh_target)-$(binutils_ver)
 	-rm -rf build-binutils-$(arm_target)-$(binutils_ver)
-	-rm -rf build-gdb-$(gdb_ver) install_gdb_stamp build_gdb_stamp 
+	-rm -rf build-gdb-$(gdb_ver) install_gdb_stamp build_gdb_stamp
 	-rm -rf build-insight-$(gdb_ver) install_insight_stamp build_insight_stamp
 
 logdir:
